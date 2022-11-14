@@ -1,0 +1,17 @@
+- name: Install php
+  apt:
+    pkg: php7.4
+
+- name: Install fpm
+  apt:
+    pkg: php7.4-fpm
+    
+- name: Copy infophp
+  copy:
+    src: info.php
+    dest: /{{item["datos"]["documentroot"]}}/
+    owner: www-data
+    group: www-data
+    mode: 0644
+  with_items:
+    - "{{virtualhosts}}"
